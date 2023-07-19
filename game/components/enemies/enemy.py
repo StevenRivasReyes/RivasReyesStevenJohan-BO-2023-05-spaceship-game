@@ -2,7 +2,7 @@ import pygame
 import random
 from pygame.sprite import Sprite
 
-from game.utils.constants import ENEMY_1, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import ENEMY_1, SCREEN_HEIGHT, SCREEN_WIDTH, METEOR
 
 class Enemy(Sprite):
     ENEMY_WIDTH = 40
@@ -47,3 +47,26 @@ class Enemy(Sprite):
         
         if (self.movement_count >= self.moves_before_change):
             self.movement_count = 0
+
+class Meteor(Sprite):
+    METEOR_WIDTH = 40
+    METEOR_HEIGHT = 60
+    def __init__(self):
+        self.image = METEOR
+        self.image = pygame.transform.scale(self.image, (self.METEOR_WIDTH, self.METEOR_HEIGHT))
+        self.rect = self.image.get_rect()
+        self.rect.x = random(40 - self.rect.width)
+        self.rect.y = random(-100, -40)
+        self.speedy = random(1,10)
+        self.speedx = random(-5, 5)
+    
+    def update(self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        if self.rect.top > 60 + 10 or self.rect.left < -25 or self.rect.right > 40 + 22:
+            self.rect.x = random(40 - self.rect.width)
+            self.rect.y = random(-100, -40)
+            self.speedy = random(1, 8)
+    
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)

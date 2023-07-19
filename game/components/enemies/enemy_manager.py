@@ -1,5 +1,5 @@
 import pygame
-from game.components.enemies.enemy import Enemy
+from game.components.enemies.enemy import Enemy,Meteor
 
 class EnemyManager:
     def __init__(self):
@@ -19,3 +19,6 @@ class EnemyManager:
         if len(self.enemies) < 1:
             enemy = Enemy()
             self.enemies.append(enemy)
+        elif len(self.enemies) < 1:
+            meteor = Meteor()
+            self.enemies.append(meteor)
