@@ -19,6 +19,6 @@ class EnemyManager:
         if len(self.enemies) < 1:
             enemy = Enemy()
             self.enemies.append(enemy)
-        elif len(self.enemies) < 1:
+        elif len(self.enemies) > 1:
             meteor = Meteor()
             self.enemies.append(meteor)

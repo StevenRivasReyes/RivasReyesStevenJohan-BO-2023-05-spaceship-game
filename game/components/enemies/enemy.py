@@ -51,22 +51,18 @@ class Enemy(Sprite):
 class Meteor(Sprite):
     METEOR_WIDTH = 40
     METEOR_HEIGHT = 60
+    Y_POS = 0
+    X_POS_RANGE = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+    SPEED_ON_Y = 1
+    SPEED_ON_X = 10
+
     def __init__(self):
         self.image = METEOR
         self.image = pygame.transform.scale(self.image, (self.METEOR_WIDTH, self.METEOR_HEIGHT))
-        self.rect = self.image.get_rect()
-        self.rect.x = random(40 - self.rect.width)
-        self.rect.y = random(-100, -40)
-        self.speedy = random(1,10)
-        self.speedx = random(-5, 5)
+        self.rect = self.image.get_rect(midtop = (random.choice(self.X_POS_RANGE), self.Y_POS))
     
     def update(self):
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        if self.rect.top > 60 + 10 or self.rect.left < -25 or self.rect.right > 40 + 22:
-            self.rect.x = random(40 - self.rect.width)
-            self.rect.y = random(-100, -40)
-            self.speedy = random(1, 8)
+        pass
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)
